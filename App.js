@@ -15,7 +15,7 @@ export default function App() {
       const response = await axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
       setWeatherData(response.data);
     } catch (error) {
-      console.error('Erro ao obter a previsão do tempo:', error);
+      console.error('Cidade não encontrada', error);
     }
   };
 
@@ -39,10 +39,15 @@ export default function App() {
         <Button style = {styles.buttonAdd} color= '#00008b' title='Buscar' 
         onPress = {getWeather}/>
         {weatherData && (
-        <View style={styles.weatherContainer}>
-          <Text style={styles.weatherText}>Cidade: {weatherData.name}</Text>
-          <Text style={styles.weatherText}>Temperatura: {weatherData.main.temp}°C</Text>
-          <Text style={styles.weatherText}>Clima: {weatherData.weather[0].description}</Text>
+        <View style={{
+          marginTop: 10,
+          alignItems: 'center',}}>
+          <Text style={{marginBottom: 5, fontWeight: 'bold', fontSize: 15,padding: 5}}>Cidade: {weatherData.name}- {weatherData.sys.country}</Text> 
+          <Text style={{marginBottom: 5, fontWeight: 'bold', fontSize: 15,padding: 5}}>Temperatura: {weatherData.main.temp} °C</Text> 
+          <Text style={{marginBottom: 5, fontWeight: 'bold', fontSize: 15,padding: 5}}>Vento: {weatherData.wind.speed} km/h</Text> 
+          <Text style={{marginBottom: 5, fontWeight: 'bold', fontSize: 15,padding: 5}}>Observação: {weatherData.weather[0].description}</Text> 
+          <Text style={{marginBottom: 5, fontWeight: 'bold', fontSize: 15,padding: 5}}>Umidade: {weatherData.main.humidity} % </Text>
+          
         </View>
       )}
 
@@ -83,12 +88,13 @@ const styles = StyleSheet.create({
   },
   ImageBackground: {
     flex: 1,
-    // width: 450,
-    // height: 500 
+    width: 500,
+    height: 400 
   },
   weatherContainer: {
     marginTop: 20,
     alignItems: 'center',
+    
   },
   weatherText: {
     fontSize: 18,
