@@ -85,6 +85,14 @@ const styles = StyleSheet.create({
     flex: 1,
     // width: 450,
     // height: 500 
-  }
+  },
+  weatherContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  weatherText: {
+    fontSize: 18,
+    marginBottom: 10,
+  },
 
 });
